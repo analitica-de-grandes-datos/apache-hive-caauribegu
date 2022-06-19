@@ -45,3 +45,5 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+create table tbl2 as select substr(c4,0,4) as year, c5 as c5 from tbl0;
+Select year, letra from tbl2 lateral view explode(c5) tab_letras as letra
