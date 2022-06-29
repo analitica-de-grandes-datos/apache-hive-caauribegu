@@ -44,3 +44,5 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+CREATE TABLE tbl2 AS SELECT EXPLODE(c5) as c5 from tbl0;
+INSERT OVERWRITE LOCAL DIRECTORY './output' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' SELECT DISTINCT(c5) FROM tbl2;

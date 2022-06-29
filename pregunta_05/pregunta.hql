@@ -45,3 +45,20 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+CREATE TABLE count_fecha
+AS 
+    SELECT (year(c4)) anno, letra 
+    FROM 
+    tbl0
+LATERAL VIEW
+explode(c5) listaLetras AS letra;
+
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    SELECT anno, letra, count(1) as count
+    FROM 
+        count_fecha
+    GROUP BY
+        anno, letra
+    ORDER BY
+         anno asc, letra asc, count asc;

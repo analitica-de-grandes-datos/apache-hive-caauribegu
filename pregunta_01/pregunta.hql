@@ -14,3 +14,11 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+CREATE TABLE data (letra STRING, fecha DATE, valor INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+TBLPROPERTIES ("skip.header.line.count"="0");
+LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE data;
+CREATE TABLE word_counts AS SELECT letra, COUNT(1) AS cantidad FROM data GROUP BY letra ORDER BY letra;
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM word_counts;
