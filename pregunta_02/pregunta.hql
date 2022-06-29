@@ -1,3 +1,4 @@
+
 /* 
 Pregunta
 ===========================================================================
@@ -22,5 +23,4 @@ FIELDS TERMINATED BY '\t';
 INSERT OVERWRITE LOCAL DIRECTORY './output' 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 SELECT * FROM data ORDER BY letra,valor;
-
 
